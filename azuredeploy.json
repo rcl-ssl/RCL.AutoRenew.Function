@@ -112,16 +112,14 @@
         },
         "resources": [
           {
-            "apiVersion": "2019-08-01",
-            "name": "web",
-            "type": "sourcecontrols",
+            "apiVersion": "2021-02-01",
+            "type": "extensions",
+            "name": "zipdeploy",
             "dependsOn": [
               "[resourceId('Microsoft.Web/sites', variables('appName'))]"
             ],
             "properties": {
-              "RepoUrl": "https://github.com/rcl-ssl/RCL.AutoRenew.Function.git",
-              "branch": "master",
-              "IsManualIntegration": true
+                "packageUri": "https://github.com/rcl-ssl/RCL.AutoRenew.Function/releases/download/V6.0.10/autorenew.zip"
             }
           }
         ]
