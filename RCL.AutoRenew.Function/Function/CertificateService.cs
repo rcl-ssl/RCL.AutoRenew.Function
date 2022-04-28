@@ -27,7 +27,7 @@ namespace RCL.AutoRenew.Function
 
             try
             {
-                await _certificateRequestService.TestAsync();
+                await _certificateRequestService.GetTestAsync();
 
                 _logger.LogInformation("TEST PASSED");
 

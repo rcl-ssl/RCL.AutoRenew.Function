@@ -1,7 +1,6 @@
 ﻿# nullable disable
 
 using Microsoft.Extensions.Options;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 
@@ -27,8 +26,6 @@ namespace RCL.AutoRenew.Function
         {
             try
             {
-                SetRequestHeadersAsync<T>(payload);
-
                 var response = await _client.PostAsync($"{_options.Value.ApiEndpoint}/{uri}",
                      new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json"));
 
@@ -55,8 +52,6 @@ namespace RCL.AutoRenew.Function
         {
             try
             {
-                SetRequestHeadersAsync<T>(payload);
-
                 var response = await _client.PostAsync($"{_options.Value.ApiEndpoint}/{uri}",
                      new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json"));
 
@@ -90,8 +85,6 @@ namespace RCL.AutoRenew.Function
         {
             try
             {
-                SetRequestHeadersAsync<T>(payload);
-
                 var response = await _client.PostAsync($"{_options.Value.ApiEndpoint}/{uri}",
                      new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json"));
 
@@ -120,19 +113,6 @@ namespace RCL.AutoRenew.Function
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            }
-        }
-
-        private void SetRequestHeadersAsync<T>(T payload)
-            where T:class
-        {
-            ResourceRequest request = payload as ResourceRequest;
-
-            _client.DefaultRequestHeaders.Clear();
-
-            if (!string.IsNullOrEmpty(request.accessToken))
-            {
-                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", request.accessToken);
             }
         }
 

@@ -2,7 +2,7 @@
 {
     public interface ICertificateRequestService
     {
-        Task TestAsync();
+        Task GetTestAsync();
         Task<List<Certificate>> GetCertificatesToRenew();
         Task RenewCertificate(Certificate certificate);
     }

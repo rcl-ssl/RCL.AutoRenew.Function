@@ -28,11 +28,11 @@ namespace RCL.AutoRenew.Function
             {
                 var formcontent = new List<KeyValuePair<string, string>>();
                 formcontent.Add(new KeyValuePair<string, string>("grant_type", "client_credentials"));
-                formcontent.Add(new KeyValuePair<string, string>("client_id", _authOptions.Value.ClientId));
-                formcontent.Add(new KeyValuePair<string, string>("client_secret", _authOptions.Value.ClientSecret));
+                formcontent.Add(new KeyValuePair<string, string>("client_id", _authOptions.Value.client_id));
+                formcontent.Add(new KeyValuePair<string, string>("client_secret", _authOptions.Value.client_secret));
                 formcontent.Add(new KeyValuePair<string, string>("resource", resource));
 
-                string url = $"https://login.microsoftonline.com/{_authOptions.Value.TenantId}/oauth2/token";
+                string url = $"https://login.microsoftonline.com/{_authOptions.Value.tenantId}/oauth2/token";
 
                 var request = new HttpRequestMessage(HttpMethod.Post, url) { Content = new FormUrlEncodedContent(formcontent) };
 
@@ -46,12 +46,12 @@ namespace RCL.AutoRenew.Function
                 }
                 else
                 {
-                    throw new Exception($"Could not obtain Access Token. {jstr}");
+                    throw new Exception($"AutoRenewFunction could not obtain Access Token. {jstr}");
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception($"Access Token Error : {ex.Message}");
+                throw new Exception($"AutoRenewFunction Access Token Error : {ex.Message}");
             }
 
             return authToken;

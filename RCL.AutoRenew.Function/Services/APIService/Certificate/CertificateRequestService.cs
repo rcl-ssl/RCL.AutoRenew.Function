@@ -15,7 +15,7 @@ namespace RCL.AutoRenew.Function
             _authTokenService = authTokenService;
         }
 
-        public async Task TestAsync()
+        public async Task GetTestAsync()
         {
             string accessToken = await GetAccessToken(Constants.AzureResourceManagerResource);
 
