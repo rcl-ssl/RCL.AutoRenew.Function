@@ -81,8 +81,48 @@ namespace RCL.AutoRenew.Function
             }
         }
 
-        [Function("Certificate-Renew")]
-        public async Task RunRenew([TimerTrigger("%CRON_EXPRESSION%")] MyInfo myTimer)
+        [Function("Certificate-Renew-Manual")]
+        public async Task<HttpResponseData> RunRenewManual([HttpTrigger(AuthorizationLevel.Function, "get", Route = "certificate/renew/manual")] HttpRequestData req)
+        {
+            _logger.LogInformation("Getting certificates to renew ...");
+
+            try
+            {
+                List<Certificate> certificates = await _certificateRequestService.GetCertificatesToRenew();
+
+                if (certificates?.Count > 0)
+                {
+                    _logger.LogInformation($"Found {certificates.Count} certificate(s) to renew");
+
+                    foreach (Certificate cert in certificates)
+                    {
+                        await _certificateRequestService.RenewCertificate(cert);
+
+                        _logger.LogInformation($"Scheduled {cert.certificateName} for renewal");
+                    }
+                }
+                else
+                {
+                    _logger.LogInformation("Did not find any certificates to renew.");
+                }
+
+                var response = req.CreateResponse(HttpStatusCode.OK);
+                response.Headers.Add("Content-Type", "text/plain ; charset=utf-8");
+                return response;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Could not get certificates to renew, {ex.Message}");
+
+                var response = req.CreateResponse(HttpStatusCode.BadRequest);
+                response.Headers.Add("Content-Type", "text/plain ; charset=utf-8");
+                response.WriteString(ex.Message);
+                return response;
+            }
+        }
+
+        [Function("Certificate-Renew-Automatic")]
+        public async Task RunRenewAutomatic([TimerTrigger("%CRON_EXPRESSION%")] MyInfo myTimer)
         {
             try
             {
