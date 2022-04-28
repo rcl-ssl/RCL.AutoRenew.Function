@@ -84,7 +84,7 @@
             },
             {
               "name": "CRON_EXPRESSION",
-              "value": "[parameters('Auto')]"
+              "value": "[parameters('Auto - do not edit')]"
             },
             {
               "name": "Auth:client_id",
