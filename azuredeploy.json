@@ -18,8 +18,8 @@
     "resources": [
       {
         "type": "Microsoft.Storage/storageAccounts",
+        "apiVersion": "2021-02-01",
         "name": "[variables('storageAccountName')]",
-        "apiVersion": "2019-06-01",
         "location": "[variables('location')]",
         "kind": "Storage",
         "sku": {
@@ -28,12 +28,14 @@
       },
       {
         "type": "Microsoft.Web/serverfarms",
-        "apiVersion": "2019-08-01",
+        "apiVersion": "2021-02-01",
         "name": "[variables('hostingPlanName')]",
         "location": "[variables('location')]",
         "sku": {
-          "name": "Y1",
-          "tier": "Dynamic"
+            "name": "Y1",
+            "tier": "Dynamic",
+            "size": "Y1",
+            "family": "Y"
         },
         "properties": {
           "name": "[variables('hostingPlanName')]",
@@ -41,8 +43,8 @@
         }
       },
       {
-        "apiVersion": "2019-08-01",
         "type": "Microsoft.Web/sites",
+        "apiVersion": "2021-02-01",
         "name": "[variables('appName')]",
         "location": "[variables('location')]",
         "kind": "functionapp",
