@@ -25,6 +25,10 @@ You can read the detailed documentation to configure, install and test the funct
 
 [RCL AutoRenew Function Documentation](https://docs.rclapp.com/autorenew/autorenew.html)
 
+## RCL Public API
+
+The RCL AUtoRenew Function is built with the [RCL Public API](https://docs.rclapp.com/api/api.html) 
+
 ## Contribute to this project
 
 If you find a bug or want to add a new feature, we welcome contributions to this project.
