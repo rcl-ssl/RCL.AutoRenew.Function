@@ -14,6 +14,7 @@ namespace RCL.AutoRenew.Function
         static ApiRequestBase()
         {
             _client = new HttpClient();
+            _client.DefaultRequestHeaders.TryAddWithoutValidation("RCL-Source", "AutoRenew-Function");
         }
 
         public ApiRequestBase(IOptions<ApiOptions> options)
