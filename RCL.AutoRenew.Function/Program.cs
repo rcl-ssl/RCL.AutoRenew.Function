@@ -16,8 +16,7 @@ var host = new HostBuilder()
         })
         .ConfigureServices(services =>
         {
-            services.AddAuthTokenService(options => configuration.Bind("Auth", options));
-            services.AddApiRequestService(options => configuration.Bind("Api", options));
+            services.AddRCLSDKService(options => configuration.Bind("RCLSDK", options));
         })
     .Build();
 
