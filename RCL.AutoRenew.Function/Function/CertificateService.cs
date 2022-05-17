@@ -5,6 +5,7 @@ using System.Text.Json;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
+using RCL.SDK;
 
 namespace RCL.AutoRenew.Function
 {
@@ -54,7 +55,7 @@ namespace RCL.AutoRenew.Function
 
             try
             {
-                List<Certificate> certificates = await _certificateRequestService.GetCertificatesToRenew();
+                List<Certificate> certificates = await _certificateRequestService.GetCertificatesToRenewAsync();
 
                 if (certificates?.Count > 0)
                 {
@@ -88,7 +89,7 @@ namespace RCL.AutoRenew.Function
 
             try
             {
-                List<Certificate> certificates = await _certificateRequestService.GetCertificatesToRenew();
+                List<Certificate> certificates = await _certificateRequestService.GetCertificatesToRenewAsync();
 
                 if (certificates?.Count > 0)
                 {
@@ -96,7 +97,7 @@ namespace RCL.AutoRenew.Function
 
                     foreach (Certificate cert in certificates)
                     {
-                        await _certificateRequestService.RenewCertificate(cert);
+                        await _certificateRequestService.RenewCertificateAsync(cert);
 
                         _logger.LogInformation($"Scheduled {cert.certificateName} for renewal");
                     }
@@ -126,13 +127,13 @@ namespace RCL.AutoRenew.Function
         {
             try
             {
-                List<Certificate> certificates = await _certificateRequestService.GetCertificatesToRenew();
+                List<Certificate> certificates = await _certificateRequestService.GetCertificatesToRenewAsync();
 
                 if(certificates?.Count > 0)
                 {
                     foreach(Certificate cert in certificates)
                     {
-                        await _certificateRequestService.RenewCertificate(cert);
+                        await _certificateRequestService.RenewCertificateAsync(cert);
                     }
                 }
             }
