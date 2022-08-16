@@ -27,7 +27,7 @@ You can read the detailed documentation to configure, install and test the funct
 
 ## RCL Public API
 
-The RCL AutoRenew Function is built with the [RCL Public API](https://docs.rclapp.com/api/api.html) and [RCL SDK](https://github.com/rcl-ssl/RCL.SDK) 
+The RCL AutoRenew Function is built with the [RCL Public API](https://docs.rclapp.com/api/api.html) and [RCL Renewal SDK](https://github.com/rcl-ssl/RCL.SDK) 
 
 ## Contribute to this project
 
